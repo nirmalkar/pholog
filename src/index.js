@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+import ReactApp from "./ReactApp"
+import { AppContainer } from "react-hot-loader";
+
+import './index.scss';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppContainer>
+      <ReactApp />
+    </AppContainer>
   </React.StrictMode>,
   document.getElementById('root')
 );
