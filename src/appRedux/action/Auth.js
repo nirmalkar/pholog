@@ -56,7 +56,7 @@ export function signUpRequest() {
   };
 }
 
-export function signUPSuccess(payload) {
+export function signUpSuccess(payload) {
   return {
     type: SIGN_UP_SUCCESS,
     status: SUCCESS,

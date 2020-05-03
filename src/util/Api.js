@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL, ACCESS_TOKEN } from '../constants/constant';
+import { API_URL, ACCESS_TOKEN } from '../constants/Constant';
 
 export default axios.create({
   baseURL: `YOUR_API_URL HERE`,

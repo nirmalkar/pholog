@@ -7,10 +7,10 @@ import Home from "../pages/Home"
 export class index extends Component {
   render() {
     return (
-      <div>
+      <>
         <Route exact path="/" render={() => <Auth />} />
         <Route exact path="/home" render={() => <Home />} />
-      </div>
+      </>
     )
   }
 }
