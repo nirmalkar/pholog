@@ -45,6 +45,7 @@ export class Login extends Component {
               value={this.state.email}
               name="email"
               type="email"
+              placeholder="Email Address"
               className="form-control"
             />
           </div>
@@ -55,6 +56,7 @@ export class Login extends Component {
               value={this.state.password}
               name="password"
               type="password"
+              placeholder="Password"
               className="form-control"
             />
           </div>
