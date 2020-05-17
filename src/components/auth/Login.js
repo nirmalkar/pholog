@@ -14,6 +14,23 @@ export class Login extends Component {
     viewPwd: false,
   };
 
+  onFormSubmit = async (e) => {
+    const { email, password } = this.state;
+    e.preventDefault();
+    const data = {
+      email,
+      password,
+    };
+    const res = await this.props.signIn(data);
+    console.log(res);
+    if (res.status === "SUCCESS") {
+      message.success("Welcome");
+      this.props.history.push("/home");
+    } else {
+      message.error(res.payload.response.data.msg);
+    }
+  };
+
   handleInputChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -31,20 +48,6 @@ export class Login extends Component {
         ...this.state,
         viewPwd: false,
       });
-    }
-  };
-  onFormSubmit = (e) => {
-    e.preventDefault();
-    const data = {
-      email: this.state.email,
-      password: this.state.password,
-    };
-    const res = this.props.signIn(data);
-    if (res.status === "SUCCESS") {
-      message.success("Welcome");
-      this.props.history.push("/home");
-    } else {
-      message.error("something went wrong!");
     }
   };
   render() {

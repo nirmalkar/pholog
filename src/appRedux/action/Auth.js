@@ -97,21 +97,18 @@ export const signIn = (user) => {
   return async (dispatch) => {
     dispatch(signInRequest());
     try {
-      const url = `auth/user`;
+      const url = `auth`;
       const result = await postData(url, user);
       const json = await result.data;
       if (json.error) throw new Error(json.message);
-
-      if (json.status === 200) {
-        localStorage.setItem(
-          ACCESS_TOKEN,
-          JSON.stringify(json.Results.token.original.access_token)
-        );
-        localStorage.setItem(USER, JSON.stringify(json.Results.user));
-        return dispatch(signInSuccess(json.Results));
-      } else return dispatch(signInFailure(json.message));
+      if (result.status === 200) {
+        console.log(result);
+        localStorage.setItem(ACCESS_TOKEN, JSON.stringify(json.token));
+        localStorage.setItem(USER, JSON.stringify(json.user));
+        return dispatch(signInSuccess(json));
+      } else return dispatch(signInFailure(json));
     } catch (e) {
-      return dispatch(signInFailure(e.message));
+      return dispatch(signInFailure(e));
     }
   };
 };
