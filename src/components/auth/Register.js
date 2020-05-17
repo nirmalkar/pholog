@@ -6,8 +6,8 @@ import { signUp } from "../../appRedux/action/Auth";
 export class Register extends Component {
   state = {};
   regFromSubmit = async (e) => {
-    const { name, email, contact, password } = this.state;
     e.preventDefault();
+    const { name, email, contact, password } = this.state;
     const data = {
       name,
       email,
@@ -15,11 +15,11 @@ export class Register extends Component {
       password,
     };
     const res = await this.props.signUp(data);
-    console.log(res);
+    console.log(res.payload.response.data.msg);
     if (res.status === "SUCCESS") {
-      message.success("Login successful!");
+      message.success("You are successfully registered!");
     } else {
-      message.error("Something went Wrong!");
+      message.error(res.payload.response.data.msg);
     }
   };
   handleInputChange = (e) => {
@@ -111,7 +111,8 @@ export class Register extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  return state;
+  console.log(state);
+  // return state;
 };
 
 export default connect(mapStateToProps, {

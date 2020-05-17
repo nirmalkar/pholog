@@ -123,18 +123,14 @@ export const signUp = (user) => {
       const url = `users`;
       const result = await postData(url, user);
       const json = await result.data;
-      console.log(json);
       if (json.error) throw new Error(json.message);
-      console.log(json.status);
-      console.log(json);
-      console.log(json.token);
-      if (json.status === 200) {
+      if (result.status === 200) {
         localStorage.setItem(ACCESS_TOKEN, JSON.stringify(json.token));
         localStorage.setItem(USER, JSON.stringify(json.user));
         return dispatch(signUpSuccess(json.Results));
       } else return dispatch(signUpFailure(json.message));
     } catch (e) {
-      return dispatch(signUpFailure(e.message));
+      return dispatch(signUpFailure(e));
     }
   };
 };
