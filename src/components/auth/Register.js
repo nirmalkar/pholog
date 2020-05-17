@@ -15,7 +15,6 @@ export class Register extends Component {
       password,
     };
     const res = await this.props.signUp(data);
-    console.log(res.payload.response.data.msg);
     if (res.status === "SUCCESS") {
       message.success("You are successfully registered!");
     } else {
@@ -112,7 +111,7 @@ export class Register extends Component {
 }
 const mapStateToProps = (state) => {
   console.log(state);
-  // return state;
+  return state;
 };
 
 export default connect(mapStateToProps, {

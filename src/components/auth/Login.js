@@ -1,53 +1,52 @@
-import React, { Component } from 'react'
-import { connect } from "react-redux"
-import { withRouter } from "react-router-dom"
-import { message } from "antd"
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { message } from "antd";
 
-import { signIn } from "../../appRedux/action/Auth"
+import { signIn } from "../../appRedux/action/Auth";
 
-import "./Login.scss"
+import "./Login.scss";
 
 export class Login extends Component {
   state = {
     email: "",
     password: "",
-    viewPwd: false
-  }
+    viewPwd: false,
+  };
 
   handleInputChange = (e) => {
-
     this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
   viewPwdToggle = () => {
-    const viewPwd = this.state.viewPwd
+    const viewPwd = this.state.viewPwd;
     if (viewPwd === false) {
       this.setState({
         ...this.state,
-        viewPwd: true
-      })
+        viewPwd: true,
+      });
     } else {
       this.setState({
         ...this.state,
-        viewPwd: false
-      })
+        viewPwd: false,
+      });
     }
-  }
+  };
   onFormSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const data = {
       email: this.state.email,
-      password: this.state.password
-    }
-    const res = this.props.signIn(data)
+      password: this.state.password,
+    };
+    const res = this.props.signIn(data);
     if (res.status === "SUCCESS") {
-      message.success("Welcome")
-      this.props.history.push("/home")
+      message.success("Welcome");
+      this.props.history.push("/home");
     } else {
-      message.error("something went wrong!")
+      message.error("something went wrong!");
     }
-  }
+  };
   render() {
     return (
       <>
@@ -73,25 +72,35 @@ export class Login extends Component {
             />
             <div className="input-group-append" onClick={this.viewPwdToggle}>
               <span className="input-group-text">
-                {this.state.viewPwd ? <i class="fas fa-eye" /> : <i class="fas fa-eye-slash"></i>}
+                {this.state.viewPwd ? (
+                  <i className="fas fa-eye" />
+                ) : (
+                  <i className="fas fa-eye-slash"></i>
+                )}
               </span>
             </div>
           </div>
-          <button type="submit" className="btn btn-primary btn-block">Login</button>
-          <label className="mt-4">Not a member yet?
-          <span
+          <button type="submit" className="btn btn-primary btn-block">
+            Login
+          </button>
+          <label className="mt-4">
+            Not a member yet?
+            <span
               onClick={this.props.tabChange}
-              className="pointer text-primary">Sign Up</span></label
-          >
+              className="pointer text-primary"
+            >
+              Sign Up
+            </span>
+          </label>
         </form>
       </>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
-  return state
-}
+  return state;
+};
 export default connect(mapStateToProps, {
-  signIn
-})(withRouter(Login))
+  signIn,
+})(withRouter(Login));
