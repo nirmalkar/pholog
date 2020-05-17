@@ -1,38 +1,37 @@
-import React, { Component } from 'react'
-import { message } from "antd"
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { message } from "antd";
 
-import { signUp } from "../../appRedux/action/Auth"
+import { signUp } from "../../appRedux/action/Auth";
 export class Register extends Component {
-  state = {
-
-  }
-  regFromSubmit = (e) => {
-    e.preventDefault()
-    console.log("hello")
-    if (!this.state.name) {
-      message.info("Please fill name")
+  state = {};
+  regFromSubmit = async (e) => {
+    const { name, email, contact, password } = this.state;
+    e.preventDefault();
+    const data = {
+      name,
+      email,
+      contact,
+      password,
+    };
+    const res = await this.props.signUp(data);
+    console.log(res);
+    if (res.status === "SUCCESS") {
+      message.success("Login successful!");
+    } else {
+      message.error("Something went Wrong!");
     }
-    if (!this.state.email) {
-      message.info("Please fill email")
-    }
-    if (!this.state.contact) {
-      message.info("Please fill contact")
-    }
-    if (!this.state.password) {
-      message.info("Please fill password")
-    }
-  }
+  };
   handleInputChange = (e) => {
     this.setState({
       ...this.state,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
   render() {
     return (
       <>
-        <form className="p-4" onSubmit={this.regFromSubmit}>
+        <form className="p-4">
           <div className="form-group">
             <label htmlFor="formGroupExampleInput">Name</label>
             <input
@@ -41,7 +40,9 @@ export class Register extends Component {
               type="text"
               name="name"
               className="form-control"
-              placeholder="Enter your name" />
+              placeholder="Enter your name"
+              required
+            />
           </div>
           <div className="form-group">
             <label htmlFor="reg-form-email">Email</label>
@@ -51,7 +52,9 @@ export class Register extends Component {
               type="text"
               name="email"
               className="form-control"
-              placeholder="Enter your email address" />
+              placeholder="Enter your email address"
+              required
+            />
           </div>
           <div className="form-group">
             <label htmlFor="reg-form-contact">Contact</label>
@@ -61,36 +64,56 @@ export class Register extends Component {
               type="number"
               name="contact"
               className="form-control"
-              placeholder="Enter your contact number" />
+              placeholder="Enter your contact number"
+              required
+            />
           </div>
           <div className="form-group">
             <label htmlFor="reg-form-password">Password</label>
             <input
               onChange={this.handleInputChange}
               id="reg-form-password"
-              type="text"
+              type="password"
               name="password"
               className="form-control"
-              placeholder="Enter your secret password" />
+              placeholder="Enter your secret password"
+              required
+            />
           </div>
           <div className="form-group">
             <label htmlFor="reg-form-submit-btn"></label>
-            <button
-              type="submit"
+            {/* <button
+              onClick={this.regFromSubmit}
               className="btn btn-primary btn-block"
               id="reg-form-submit-btn">
               Submit
-              </button >
+              </button > */}
           </div>
+          <button
+            onClick={this.regFromSubmit}
+            className="btn btn-primary btn-block"
+            id="reg-form-submit-btn"
+          >
+            Submit
+          </button>
+          <label>
+            Already a member?
+            <span
+              onClick={this.props.tabChange}
+              className="pointer text-primary"
+            >
+              SingIn
+            </span>
+          </label>
         </form>
       </>
-    )
+    );
   }
 }
 const mapStateToProps = (state) => {
-  return state
-}
+  return state;
+};
 
 export default connect(mapStateToProps, {
   signUp,
-})(Register)
+})(Register);

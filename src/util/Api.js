@@ -39,66 +39,7 @@ export async function postFormData(path, postData) {
   });
 }
 
-export async function postRawData(path, rawData) {
-  const url = `${API_URL}/${path} `;
-  return await axios({
-    url: url,
-    method: 'POST',
-    data: { questions: rawData },
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Cache-Control': 'no-cache',
-      Authorization: 'Bearer ' + JSON.parse(localStorage.getItem(ACCESS_TOKEN)),
-    },
-  });
-}
 
-export async function postQuestionData(path, rawData) {
-  const url = `${API_URL}/${path} `;
-  return await axios({
-    url: url,
-    method: 'POST',
-    data: rawData,
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Cache-Control': 'no-cache',
-      Authorization: 'Bearer ' + JSON.parse(localStorage.getItem(ACCESS_TOKEN)),
-    },
-  });
-}
-
-export async function postRawDataForAsses(path, rawData) {
-  const url = `${API_URL}/${path} `;
-  return await axios({
-    url: url,
-    method: 'POST',
-    data: rawData,
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Cache-Control': 'no-cache',
-      Authorization: 'Bearer ' + JSON.parse(localStorage.getItem(ACCESS_TOKEN)),
-    },
-  });
-}
-
-export async function rawDifficulty(path, rawData) {
-  const url = `${API_URL}/${path} `;
-  console.log(rawData);
-  return await axios({
-    url: url,
-    method: 'POST',
-    data: { level_name: rawData },
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Cache-Control': 'no-cache',
-      Authorization: 'Bearer ' + JSON.parse(localStorage.getItem(ACCESS_TOKEN)),
-    },
-  });
-}
 
 export async function getData(path) {
   if (localStorage.getItem(ACCESS_TOKEN)) {

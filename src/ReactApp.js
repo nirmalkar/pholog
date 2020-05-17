@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { ConnectedRouter } from "react-router-redux";
 import { Provider } from "react-redux";
 import configureStore, { history } from './appRedux/store';
 import { BrowserRouter, Switch } from "react-router-dom"

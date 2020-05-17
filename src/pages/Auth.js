@@ -1,37 +1,41 @@
 import React, { Component } from 'react'
-import { Tabs } from 'antd';
 
 import Login from "../components/auth/Login"
 import Register from "../components/auth/Register"
 
 import "./Auth.scss"
 
-const { TabPane } = Tabs;
 
 class Auth extends Component {
 
   state = {
-
+    loginTab: true
   }
 
-  tabChange = (key) => {
-    console.log(key)
+  tabChange = () => {
+    const loginTab = this.state.loginTab
+    if (loginTab === true) {
+      this.setState({
+        ...this.state,
+        loginTab: false
+      })
+    } else {
+      this.setState({
+        ...this.state,
+        loginTab: true
+      })
+    }
   }
   render() {
+    const loginTab = this.state.loginTab
+    const tabChange = this.tabChange
     return (
-      <div className="row no-gutters">
-        <div className="col-8">
-
-        </div>
-        <div className="col-4 mt-5 ">
-          <Tabs className="mt-tab" onChange={this.tabChange} type="card">
-            <TabPane tab="Log In" key="1">
-              <Login />
-            </TabPane>
-            <TabPane tab="Register" key="2">
-              <Register />
-            </TabPane>
-          </Tabs>
+      <div className="row no-gutters flex justify-content-center">
+        <div className="col-4 card border-0 shadow mt-tab">
+          <h2 className="main-font weight text-center pt-3">Pholog</h2>
+          {
+            loginTab ? <Login tabChange={tabChange} /> : <Register tabChange={tabChange} />
+          }
         </div>
       </div>
     )

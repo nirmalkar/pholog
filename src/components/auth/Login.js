@@ -10,7 +10,8 @@ import "./Login.scss"
 export class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    viewPwd: false
   }
 
   handleInputChange = (e) => {
@@ -19,7 +20,20 @@ export class Login extends Component {
       [e.target.name]: e.target.value
     })
   }
-
+  viewPwdToggle = () => {
+    const viewPwd = this.state.viewPwd
+    if (viewPwd === false) {
+      this.setState({
+        ...this.state,
+        viewPwd: true
+      })
+    } else {
+      this.setState({
+        ...this.state,
+        viewPwd: false
+      })
+    }
+  }
   onFormSubmit = (e) => {
     e.preventDefault()
     const data = {
@@ -39,7 +53,6 @@ export class Login extends Component {
       <>
         <form className="p-4" onSubmit={this.onFormSubmit}>
           <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Email address</label>
             <input
               onChange={this.handleInputChange}
               value={this.state.email}
@@ -49,18 +62,27 @@ export class Login extends Component {
               className="form-control"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="exampleInputPassword1">Password</label>
+          <div className="input-group mb-4">
             <input
               onChange={this.handleInputChange}
               value={this.state.password}
               name="password"
-              type="password"
+              type={this.state.viewPwd ? "text" : "password"}
               placeholder="Password"
               className="form-control"
             />
+            <div className="input-group-append" onClick={this.viewPwdToggle}>
+              <span className="input-group-text">
+                {this.state.viewPwd ? <i class="fas fa-eye" /> : <i class="fas fa-eye-slash"></i>}
+              </span>
+            </div>
           </div>
-          <button type="submit" className="btn btn-primary btn-block">Submit</button>
+          <button type="submit" className="btn btn-primary btn-block">Login</button>
+          <label className="mt-4">Not a member yet?
+          <span
+              onClick={this.props.tabChange}
+              className="pointer text-primary">Sign Up</span></label
+          >
         </form>
       </>
     )
